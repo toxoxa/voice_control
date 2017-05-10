@@ -1,0 +1,14 @@
+{
+  "name": "electron-simple-app",
+  "version": "0.0.1",
+  "main": "main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron ."
+  },
+  "dependencies": {
+    "electron-compile": "^6.4.1"
+  },
+  "devDependencies": {
+    "electron-compilers": "^5.9.0"
+  }
+}
