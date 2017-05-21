@@ -1,0 +1,22 @@
+body {
+   background: #C0C0C0;
+}
+
+h1 {
+   color: #8A2BE2;
+   text-align: center;
+}
+
+p {
+   text-align: center;
+   font-size: 30px;
+}
+
+button {
+   margin: 0 auto;
+   display: block;
+   font-size: 1.1rem;
+   width: 170px;
+   line-height: 2;
+   margin-top: 30px;
+}
