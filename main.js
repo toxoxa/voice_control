@@ -30,10 +30,6 @@ const serverPort = 3000;
 //    });
 // });
 server.use(express.static('public'));
-server.get('/*', function(reg, res){
-   //res.sendFile(__dirname + '/index.html');
-   //res.sendFile(__dirname + '/script.js');
-})
 server.listen(serverPort, function(){
    console.log('Server start')
 })

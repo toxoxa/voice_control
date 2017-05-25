@@ -1,15 +1,15 @@
 {
-  "name": "Jarvis",
-  "version": "0.0.2",
-  "main": "main.js",
-  "scripts": {
-    "start": "node node_modules/less/bin/lessc style.less style.css",
-    "start-server": "node node_modules/less/bin/lessc -s public/style.less public/style.css && node main.js"
-  },
-  "dependencies": {
-    "electron-compile": "^6.4.1"
-  },
-  "devDependencies": {
-    "electron-compilers": "^5.9.0"
-  }
+   "name": "Jarvis",
+   "version": "0.0.2",
+   "main": "main.js",
+   "scripts": {
+      "start": "./node_modules/.bin/electron .",
+      "start-server": "node node_modules/less/bin/lessc -s public/style.less public/style.css && node main.js"
+   },
+   "dependencies": {
+      "electron-compile": "^6.4.1"
+   },
+   "devDependencies": {
+      "electron-compilers": "^5.9.0"
+   }
 }

@@ -48,9 +48,10 @@ window.onload = function() {
       var calc = new RegExp('\\d+.+\\d+')
        if(calc.test(text))
           calculate(text);
-       if(text.toLowerCase() == 'переведи')
+       if(text.toLowerCase() == 'переведи') {
          recognizer.abort();
          listenOneFrase();
+      }
    }
 
    //Выисления калькулятора
