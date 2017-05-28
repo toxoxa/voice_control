@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 const server = express();
 const serverPort = 3000;
 // const electron = require('electron');

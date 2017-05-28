@@ -4,6 +4,23 @@ window.onload = function() {
       output = document.getElementById('output'),
       result = document.getElementById('result'),
       start = document.getElementById('start-rec');
+   var langList = {
+      'английский': 'en',
+      'болгарский': 'bg',
+      'греческий': 'el',
+      'грузинский': 'ka',
+      'иврит': 'he',
+      'итальянский': 'it',
+      'испанский': 'es',
+      'китайский': 'zh',
+      'латынь': 'la',
+      'македонский': 'mk',
+      'монгольский': 'mn',
+      'немецкий': 'de',
+      'польский': 'pl',
+      "финский": "fi",
+      'французский': 'fr'
+   };
 
    //Класс для распознавания речи
    class Recognizer {
@@ -15,8 +32,8 @@ window.onload = function() {
          this.recognition.onspeechend = function() {
             this.stop();
          }
-         this.recognition.onerror = function(err) {
-            console.log("Ошибка распознования речи" + err);
+         this.recognition.onerror = function(event) {
+            console.log("Ошибка распознования речи: " + event.error);
          }
       }
 
@@ -45,12 +62,16 @@ window.onload = function() {
 
    //Выбор команды
    function chooseOperation(text, recognizer) {
-      var calc = new RegExp('\\d+.+\\d+')
-       if(calc.test(text))
-          calculate(text);
-       if(text.toLowerCase() == 'переведи') {
+      var
+         calc = new RegExp('\\d+.+\\d+'),
+         translateInto = new RegExp('переведи на (.+)');
+      text = text.toLowerCase();
+      if(calc.test(text))
+         calculate(text);
+      if(translateInto.test(text) || text === 'переведи') {
          recognizer.abort();
-         listenOneFrase();
+         var lang = translateInto.test(text) ? translateInto.exec(text)[1] : 'английский';
+         listenOneFrase(lang);
       }
    }
 
@@ -82,27 +103,33 @@ window.onload = function() {
       }
    }
 
-   function listenOneFrase() {
-      var oneFraseRecognizer = new Recognizer();
-      oneFraseRecognizer.start();
-      start.disabled = true;
-      output.textContent = 'Что мне перевести?';
+   function listenOneFrase(lang) {
+      if(langList[lang]) {
+         lang = langList[lang];
+         var oneFraseRecognizer = new Recognizer();
+         oneFraseRecognizer.start();
+         start.disabled = true;
+         output.textContent = 'Что мне перевести?';
 
-      oneFraseRecognizer.recognition.onresult = function(event) {
-         var text = event.results[0][0].transcript;
-         result.textContent = text;
-         translate(text);
+         oneFraseRecognizer.recognition.onresult = function(event) {
+            var text = event.results[0][0].transcript;
+            result.textContent = text;
+            translate(text, lang);
+         }
+      } else {
+         result.textContent = 'Данный язык не поддерживается';
+         return;
       }
    }
 
-   function translate(str) {
+   function translate(str, lang) {
       var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20170523T195620Z.4eb3dde0ae275bc1.9303391defa57384bf612ed20be2e5f49173c2e6';
       //TODO типа яндексом переведно, туда-сюда
       $.ajax({
             url: url,
             data: {
                 text: str,
-                lang: 'en'
+                lang: lang
             },
             success: function(translation) {
                 start.disabled = false;
