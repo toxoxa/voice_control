@@ -3,8 +3,7 @@
    "version": "0.0.2",
    "main": "main.js",
    "scripts": {
-      "start": "./node_modules/.bin/electron .",
-      "start-server": "node node_modules/less/bin/lessc -s public/style.less public/style.css && node main.js"
+      "start": "node node_modules/less/bin/lessc -s public/style.less public/style.css && node main.js"
    },
    "devDependencies": {
       "less": "latest",

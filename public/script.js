@@ -46,6 +46,11 @@ window.onload = function() {
       }
    }
 
+   function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance)
+   }
+
    start.onclick = startRec;
 
    //Включаем записаь
@@ -87,18 +92,22 @@ window.onload = function() {
          parsed = reg.exec(str);
       if(sum.indexOf(parsed[2].trim()) !== -1) {
          result.textContent = Number(parsed[1]) + Number(parsed[3]);
+         speak(result.textContent);
          return;
       }
       if(diff.indexOf(parsed[2].trim()) !== -1) {
          result.textContent = parsed[1] - parsed[3];
+         speak(result.textContent);
          return;
       }
       if(mult.indexOf(parsed[2].trim()) !== -1) {
          result.textContent = parsed[1] * parsed[3];
+         speak(result.textContent);
          return;
       }
       if(div.indexOf(parsed[2].trim()) !== -1) {
          result.textContent = parsed[1] / parsed[3];
+         speak(result.textContent);
          return;
       }
    }
@@ -118,6 +127,7 @@ window.onload = function() {
          }
       } else {
          result.textContent = 'Данный язык не поддерживается';
+         speak(result.textContent);
          return;
       }
    }
@@ -134,6 +144,7 @@ window.onload = function() {
             success: function(translation) {
                 start.disabled = false;
                 result.textContent += ':  ' + translation.text[0];
+                speak(result.textContent);
             }
         });
    }
