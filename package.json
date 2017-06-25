@@ -1,13 +1,17 @@
 {
-   "name": "Jarvis",
-   "version": "0.0.2",
-   "main": "main.js",
-   "scripts": {
-      "start": "node node_modules/less/bin/lessc -s public/style.less public/style.css && node main.js"
-   },
-   "devDependencies": {
-      "less": "latest",
-      "electron": "latest",
-      "express": "latest"
-   }
+  "name": "Jarvis",
+  "version": "0.0.2",
+  "main": "main.js",
+  "scripts": {
+    "start": "node node_modules/less/bin/lessc -s public/style.less public/style.css && node main.js"
+  },
+  "devDependencies": {
+    "express": "latest",
+    "less": "latest"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "es6-promise": "^4.1.0",
+    "isomorphic-fetch": "^2.2.1"
+  }
 }

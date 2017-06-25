@@ -1,9 +1,4 @@
 @pretty: #8A2BE2;
-@grey: #C0C0C0;
-
-body {
-   background: @grey;
-}
 
 h1 {
    color: @pretty;
@@ -15,11 +10,41 @@ p {
    font-size: 30px;
 }
 
+#start-rec {
+   width: 202px;
+   height: 202px;
+   border-radius: 100px;
+   border: 1px solid #7a7b7e;
+   background-image: url(resources/micro.png);
+}
+
 button {
-   margin: 0 auto;
+   margin: 30px auto 0;
    display: block;
    font-size: 1.1rem;
    width: 170px;
    line-height: 2;
-   margin-top: 30px;
+}
+
+img {
+   margin-left: 15px;
+   margin-right: 15px;
+}
+
+#functions {
+   text-align: center;
+   margin-top: 20px;
+   margin-left: 20px;
+}
+//для заметок
+#notes {
+   width:520px;
+   height: 200px;
+   font-size: 18pt;
+   margin: 15px auto auto;
+   overflow: auto;
+   padding: 10px;
+   border: 1px solid #7a7b7e;
+   text-align: left;
+   white-space: pre-wrap;
 }
