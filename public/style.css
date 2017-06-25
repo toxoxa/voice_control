@@ -39,5 +39,7 @@ img {
    border: 1px solid #7a7b7e;
    text-align: left;
    white-space: pre-wrap;
-   display: none;
+}
+.hidden {
+    display: none;
 }

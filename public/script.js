@@ -5,6 +5,7 @@ window.onload = function() {
       result = document.getElementById('result'),
       start = document.getElementById('start-rec'),
       notesNode = $('#notes'),
+      func = $('#functions').children(),
       notes;
    var langList = {
       'английский': 'en',
@@ -56,9 +57,21 @@ window.onload = function() {
 
    start.onclick = startRec;
 
+   function hideColored() {
+      for(var f in func){
+         if(f < func.length) {
+            if (f & 1) {
+               $(func[f]).addClass('hidden');
+            } else {
+               $(func[f]).removeClass('hidden');
+            }
+         }
+      }
+   }
+
    //Включаем записаь
    function startRec() {
-      notesNode.hide();
+      notesNode.addClass('hidden');
       //Создаем экземпляр webkitSpeechRecognition, который будем использовать для распознавания речи
       var recognizer = new Recognizer();
       recognizer.start();
@@ -78,21 +91,33 @@ window.onload = function() {
          delNote = new RegExp('удали заметку номер (\\d+)'),
          showNote = new RegExp('покажи заметки');
       text = text.toLowerCase();
-      if(calc.test(text))
+      hideColored();
+      if(calc.test(text)) {
+         $(func[2]).addClass('hidden');
+         $(func[3]).removeClass('hidden');
          calculate(text);
+      }
       if(translateInto.test(text) || text === 'переведи') {
          recognizer.abort();
+         $(func[0]).addClass('hidden');
+         $(func[1]).removeClass('hidden');
          var lang = translateInto.test(text) ? translateInto.exec(text)[1] : 'английский';
          listenOneFrase(lang);
       }
       if(showNote.test(text)) {
+         $(func[4]).addClass('hidden');
+         $(func[5]).removeClass('hidden');
          getNotes();
       }
       if(delNote.test(text)) {
+         $(func[4]).addClass('hidden');
+         $(func[5]).removeClass('hidden');
          var num = delNote.exec(text);
          deleteNote();
       }
       if(createNote.test(text)) {
+         $(func[4]).addClass('hidden');
+         $(func[5]).removeClass('hidden');
          listenNote();
       }
    }
@@ -194,7 +219,7 @@ window.onload = function() {
                txt += +note + 1 + ') ' + notes[note].text + '\n';
             }
             notesNode.text(txt);
-            notesNode.show();
+            notesNode.removeClass('hidden');
             speak('Вот заметки, которые я нашёл');
          }
       });
@@ -218,18 +243,18 @@ window.onload = function() {
       });
    }
 
-   // document.getElementById('weather').onclick = function() {
-   //    var params = JSON.stringify({
-   //       'action': 'get_weather'
-   //    });
-   //     $.ajax({
-   //         url: '/api',
-   //         type: 'post',
-   //         contentType: 'application/json',
-   //         data: params,
-   //         success: function(data) {
-   //            alert(data);
-   //         }
-   //     });
-   // }
+   function getWeather() {
+      var params = JSON.stringify({
+         'action': 'get_weather'
+      });
+       $.ajax({
+           url: '/api',
+           type: 'post',
+           contentType: 'application/json',
+           data: params,
+           success: function(data) {
+              alert(data);
+           }
+       });
+   }
 };
